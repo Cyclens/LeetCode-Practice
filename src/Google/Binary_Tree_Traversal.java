@@ -31,6 +31,11 @@ public class Binary_Tree_Traversal {
 	}
 
 	public List<Integer> inorderTraversal(TreeNode root) {
+		/*
+		 * 1. Traverse the left subtree, i.e., call Inorder(left-subtree)
+   		 * 2. Visit the root.
+   		 * 3. Traverse the right subtree, i.e., call Inorder(right-subtree)
+		 */
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();
 		TreeNode curr = root;
@@ -47,6 +52,11 @@ public class Binary_Tree_Traversal {
 	}
 
 	public List<Integer> preorderTraversal(TreeNode node) {
+		/*
+		 * 1. Visit the root.
+		   2. Traverse the left subtree, i.e., call Preorder(left-subtree)
+		   3. Traverse the right subtree, i.e., call Preorder(right-subtree) 
+		   */
 		List<Integer> list = new LinkedList<Integer>();
 		Stack<TreeNode> rights = new Stack<TreeNode>();
 		while (node != null) {
@@ -63,6 +73,11 @@ public class Binary_Tree_Traversal {
 	}
 
 	public List<Integer> postorderTraversal(TreeNode root) {
+		/*
+		 *  1. Traverse the left subtree, i.e., call Postorder(left-subtree)
+   			2. Traverse the right subtree, i.e., call Postorder(right-subtree)
+   			3. Visit the root.
+		 */
 		LinkedList<Integer> result = new LinkedList<>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();
 		TreeNode p = root;
@@ -126,6 +141,10 @@ public class Binary_Tree_Traversal {
         root.right.left = new TreeNode(6);
         root.right.right = new TreeNode(7);
  
-        postOrderIterative(root);
+        //postOrderIterative(root);
+        System.out.println(new Binary_Tree_Traversal().levelOrder(root) + ", level order");
+        System.out.println(new Binary_Tree_Traversal().inorderTraversal(root) + ", in-order");
+        System.out.println(new Binary_Tree_Traversal().postorderTraversal(root) + ", post order");
+        System.out.println(new Binary_Tree_Traversal().preorderTraversal(root) + ", pre order");
     }
 }
