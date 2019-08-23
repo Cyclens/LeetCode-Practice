@@ -2,44 +2,52 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+class TreeNode {
+	int val;
+	TreeNode left;
+	TreeNode right;
+
+	TreeNode(int x) {
+		val = x;
+	}
+}
+
 public class Serialize_and_Deserialize_Binary_Tree {
-
 	// Encodes a tree to a single string.
-	public String serialize(TreeNode root) {
-
+	public static String serialize(TreeNode root) {
 		return serial(new StringBuilder(), root).toString();
 	}
 
-	private StringBuilder serial(StringBuilder sb, TreeNode root) {
-		// TODO Auto-generated method stub
+	private static StringBuilder serial(StringBuilder str, TreeNode root) {
 		if (root == null)
-			return sb.append("null").append(",");
-		else {
-			sb.append(root.val).append(",");
-			serial(sb, root.left);
-			serial(sb, root.right);
-		}
-		return sb;
+			return str.append("null");
+		str.append(root.val).append(",");
+		serial(str, root.left).append(",");
+		serial(str, root.right);
+		return str;
 	}
 
 	// Decodes your encoded data to tree.
-	public TreeNode deserialize(String data) {
-
+	public static TreeNode deserialize(String data) {
 		return deserial(new LinkedList<>(Arrays.asList(data.split(","))));
 	}
 
-	private TreeNode deserial(Queue<String> queue) {
-		// TODO Auto-generated method stub
-		String val = queue.poll();
-		if (val.equals("null"))
+	private static TreeNode deserial(Queue<String> q) {
+		String val = q.poll();
+		System.out.println(val+ "123");
+		if ("null".equals(val))
 			return null;
-		else {
-			TreeNode root = new TreeNode(Integer.valueOf(val));
-			root.left = deserial(queue);
-			root.right = deserial(queue);
-			return root;
-		}
-
+		System.out.println(val);
+		TreeNode root = new TreeNode(Integer.valueOf(val));
+		root.left = deserial(q);
+		root.right = deserial(q);
+		return root;
 	}
 
+	public static void main(String[] args) {
+		String data = "1,2,3,null,null,4,5";
+		TreeNode node = deserialize(data);
+		String serializedNode = serialize(node);
+		System.out.println(serializedNode);
+	}
 }

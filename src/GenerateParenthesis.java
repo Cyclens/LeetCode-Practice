@@ -2,25 +2,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenerateParenthesis {
-	public List<String> generateParenthesis (int n) {
+
+	public static List<String> gen (int n) {
 		List<String> res = new ArrayList<String>();
-		backtrack(res, "", 0, 0, n);
+		if (n != 0) {
+			backtrack(res, "", 0, 0, n);
+		}
 		return res;
 	}
 	
-	public void backtrack(List<String> res, String str, int open, int close, int n) {
-		if (str.length() == n * 2) {
-			res.add(str);
+	public static void backtrack (List<String> res, String s, int l, int r, int n) {
+		if (s.length() == 2 * n) {
+			res.add(s);
 			return;
 		}
-		
-		if (open < n) backtrack(res, str + "(", open + 1, close, n);
-		if (open > close) backtrack(res, str + ")", open, close + 1, n);
+		if (l < n) {
+			backtrack(res, s + "(", l + 1, r, n);
+		}
+		if (r < l) {
+			backtrack(res, s + ")", l, r + 1, n);
+		}
 	}
 	
 	public static void main (String[] args) {
-		int n = 5;
-		List<String> parenthesis = new GenerateParenthesis().generateParenthesis(n);
-		System.out.println(parenthesis.toString());
+		int n = 3;
+		System.out.println(gen(n).toString());
 	}
 }

@@ -2,16 +2,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UniqueSum {
-	public static int uniqueSum (int[] nums) {
+	
+	public static int uniqueSum(int[] nums) {
+		int sum = 0;
 		Set<Integer> set = new HashSet<Integer>();
-		int res = 0;
-		for (int num : nums) {
-			if (set.contains(num)) res++;
-			else {
-				set.add(num);
-				res += num;
-			}
+		for (int i = 0; i < nums.length; i++) {
+			if (set.add(nums[i])) sum+= nums[i];
+			else sum++;
 		}
-		return res;
+		return sum;
+	}
+	
+	public static void main (String[] args) {
+		int[] nums = new int[] {1,2,3,4,4,2,3,1};
+		System.out.println(uniqueSum(nums));
 	}
 }

@@ -9,16 +9,18 @@ public class ValidTriangleFromList {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		for (int i = 0; i < nums.length - 2; i++) {
 			int k = i + 2;
-			for (int j = i + 1; j < nums.length - 1; j++) {
+			for (int j = i + 1; j < nums.length && nums[i] != 0; j++) {
+				System.out.println(Arrays.toString(new int[] {i, j, k}));
+				if (k == nums.length - 1) k--;
 				while (k < nums.length && nums[i] + nums[j] > nums[k]) {
-					if (k > j) {
+					if (k != j) {
 						List<Integer> curr = new ArrayList<Integer>();
 						curr.add(nums[i]);
 						curr.add(nums[j]);
 						curr.add(nums[k]);
 						res.add(curr);
 					}
-					++k;
+					k++;
 				}
 			}
 		}
@@ -26,7 +28,7 @@ public class ValidTriangleFromList {
 	}
 
 	public static void main(String[] args) {
-		int arr[] = { 10, 21, 22, 100, 101, 200, 300 };
+		int arr[] = {1,2,3,4,5,6};
 		System.out.println(new ValidTriangleFromList().vlidTriangle(arr).toString());
 	}
 }
